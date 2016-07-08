@@ -58,6 +58,14 @@ resource "aws_security_group" "consul" {
         self = true
     }
 
+    // These are for maintenance
+    ingress {
+        from_port = 22
+        to_port = 22
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
     // This is for outbound internet access
     egress {
         from_port = 0
