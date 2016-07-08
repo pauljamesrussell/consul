@@ -3,7 +3,8 @@ resource "aws_instance" "server" {
     instance_type = "${var.instance_type}"
     key_name = "${var.key_name}"
     count = "${var.servers}"
-    security_groups = ["${aws_security_group.consul.name}"]
+    subnet_id = "${var.subnet_id}"
+    vpc_security_group_ids = ["${aws_security_group.consul.id}"]
 
     connection {
         user = "${lookup(var.user, var.platform)}"
@@ -40,6 +41,7 @@ resource "aws_instance" "server" {
 resource "aws_security_group" "consul" {
     name = "consul_${var.platform}"
     description = "Consul internal traffic + maintenance."
+    vpc_id = "${var.vpc_id}"
 
     // These are for internal traffic
     ingress {

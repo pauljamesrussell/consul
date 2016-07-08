@@ -80,3 +80,11 @@ variable "tagName" {
     default = "consul"
     description = "Name tag for the servers"
 }
+
+variable "subnet_id" {
+    description = "The ID of the subnet to deploy the cluster within"
+}
+
+variable "vpc_id" {
+    description = "The ID of the VPC within which to deploy the cluster"
+}
